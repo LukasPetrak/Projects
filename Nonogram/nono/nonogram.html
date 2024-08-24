@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        html {
+            font-family: "Lucida Sans", sans-serif; /* Písmo pro celou html. */
+            color: green; /* Defaultní barva písma. */
+            background-color: rgb(0, 0, 0); /* Barva html. */
+            scroll-behavior: smooth;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        .row::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+        .grid-container { /* Hlavní mřížka. */
+            display: grid; /* Zobrazení mřížka. */
+            grid-template-columns: 15% auto 15%;
+            background-color: rgba(0, 40, 0, 1); /* Barva. */
+            padding: 5px; /* Vzdálenost od okraje stránky. */
+        }
+            .grid-container > div {
+                background-color: rgba(200, 255,200, 0.2); /* Barva jednotlivých položek v hlavní mřížce. */
+                border: 2px solid rgba(0, 40, 0, 0.5); /* Orámování jednotlivých polí v hlavní mřížce. */
+                text-align: center;
+                padding: 0px 0px; /* Vzdálenost polí od okraje hlavní mřížky. */
+                font-size: 150%;
+            }
+        .item1 {
+            grid-column: 1/4;
+        }
+        .grid-container-nono {
+            display: grid;
+            grid-template-columns: 20px 20px 20px 20px 20px;
+            grid-template-rows: 20px 20px 20px 20px 20px;
+            height: 450px;
+            align-content: center;
+            justify-content: center;
+            gap: 2px;
+        }
+        .grid-container2 {
+            display: grid;
+            justify-content: center;
+            align-content: space-evenly;
+            grid-template-rows: 120px 70px 70px 70px 70px 70px;
+        }
+        p {
+            text-align: left;
+            color: black;
+            padding: 0px 10px;
+        }
+        .btn-group .button {
+            background-color: #4CAF50; /* Green */
+            border: 2px solid green;
+            border-radius: 15px;
+            box-shadow: 0 5px #000;
+            display: block;
+            color: black;
+            padding: 5px 5px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            width: 80px; /* Šířka bloku tlačítek. */
+            margin-left:15%;
+        }
+            .btn-group .button:not(:last-child) {
+                border-bottom: none; /* Prevent double borders */
+            }
+            .btn-group .button:hover {
+                background-color: #3e8e41;
+            }
+            .btn-group .button:active {
+                background-color: #3e4e33;
+                box-shadow: 0 2px #660;
+                transform: translateY(4px);
+            }
+        
+        .poku {
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            background-color: #b6ff00;
+        }
+        label {
+            color: black;
+            font-size: 16px;
+        }
+        .labelsetnono {
+            color: #4CAF50;
+            opacity: 0.5;
+            font-size: 12px;
+        }
+        .result {
+            font-size: 16px;
+            font-style:italic;
+            text-align: center;
+            margin-top: 2px;
+        }
+        h1, h2, h3 {
+            text-decoration:solid;
+        }
+        h4 {
+            opacity: 0.5;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+        h5 {
+            opacity: 1.0;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+        h6 {
+            opacity: 0.5;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+        .area {
+            color: rgba(200, 255,200, 0.1);
+        }
+        .option {
+            text-align:left; 
+            margin-left:30px;
+        }
+       
+    </style>
+</head>
+<body>
+    <!-- Hlavní mřížka. -->
+    <div id="section1" class="grid-container">
+        <div class="item1"> <h1>Nonogram</h1> </div>
+        <!-- Panel s tlačítky. -->
+        <div id="choice" class="grid-container2 btn-group">
+            <div><h2>Choice</h2></div>
+            <div><button class="button" onclick="reset(1)">Reset</button></div>
+            <div><button class="button" onclick="cls()">Clear</button></div>
+            <div><button class="button" onmousedown="rows()">Row</button></div>
+            <div><button class="button" onmousedown="clmns()">Column</button></div>
+            <div><button class="button" onmousedown="run_nono(); setTimeout(cptSet, 3000)">Solve</button></div>
+        </div>
+        <div id="setnono">
+            <h4 id="nadpis" style="margin-top:10px">Mouse, draw a picture</h4>
+            <!-- Manualní tvorba nono_g. -->
+            <div id="getNono" class="grid-container-nono"></div>
+            <h3 id="area" class="area"> Area: </h3>
+        </div>
+        <!-- Nastavení. -->
+        <div id="option" class="grid-container2">
+            <div><h2>Option</h2></div>
+            <div>
+                <h5>Direction:</h5>
+                <div class="option">
+                    <input type="radio" id="rUp" name="direction" checked="checked">
+                    <label for="rUp">Up</label><br>
+                    <input type="radio" id="rDown" name="direction">
+                    <label for="rDown">Down</label>
+                </div>
+            </div>
+            <div></div>
+            <div>
+                <h5>Aspect ratio:</h5>
+                <div  class="option">
+                    <input type="radio" id="rLck" name="ratioA" checked="checked">
+                    <label for="rLck">Lock</label><br>
+                    <input type="radio" id="rUnlck" name="ratioA">
+                    <label for="rUnlck">Unlock</label>
+                </div>
+            </div>
+            <div></div>
+            <div></div>
+        </div>
+        <div id="section2" class="item1">
+            <!-- Zobrazení kompletních dat pro výpočet. -->
+            <h3>Data for nonogram calculation:</h3><!-- . -->
+            <h5>Rows:
+                <input type="checkbox" id="rowLck" style="text-align:left; margin-left:36px; opacity:0.4;" onclick="lockRC(this)">
+                <label for="rowLck" class="labelsetnono">Lock</label>
+            </h5>
+            <p class="result"><strong id="m_row"></strong></p>
+            <h5>Columns:
+                <input type="checkbox" id="clmLck" style="text-align: left; margin-left: 5px; opacity:0.4;" onclick="lockRC(this)">
+                <label for="clmLck" class="labelsetnono">Lock</label>
+            </h5>
+            <p class="result"><strong id="m_clm"></strong></p>
+
+        </div>
+        <div id="result" class="item1">
+            <h2 id="cpt1">Nonogram - calculated</h2>
+            <!-- Volba řešení. -->
+            <div id="chng_nono" class=" btn-group" style="visibility: hidden; display: inline-flex">
+                <button class="button" style="width: 80px; margin-right: 20px; margin-left: 0px" onmousedown="nono(0)"><</button>
+                <label id="nononum" style="width:60px">1</label>
+                <button class="button" style="width: 80px; margin-left: 20px" onmousedown="nono(1)">></button>
+            </div>
+            <!-- <button id="start"  class="button" onmousedown="get_nono_solution()">show</button> -->
+            <div id="setNono" class="grid-container-nono"> </div><br>
+            <!-- Zde se zobrazí výsledek. -->
+            <h5 id="cpt2"></h5><br>
+            <div id="nextStep" class=" btn-group" style="display:inline-flex; visibility:hidden">
+                <button id="again" class="button" style="width: 80px; margin-right: 50px; margin-left: 0px" onclick="again()">Again</button>
+                <button id="end" class="button" style="width: 80px; margin-left: 50px" onclick="n_step =1" }> End </button>
+            </div><br><br>
+        </div>
+    </div>
+    <script src="nono.js"></script>
+</body>
+    </html>
+
+
+
+
