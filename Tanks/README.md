@@ -5,7 +5,7 @@ It is simple tank game which was written in Matlab (OOP).
 
 ## Ukázka hry
 
-![Ukázka hry](cesta_k_vasemu_gifu.gif)
+![Ukázka hry](/Documents/GitHub/Projects/Tanks/gif.gif)
 
 ## Game Controls
 
