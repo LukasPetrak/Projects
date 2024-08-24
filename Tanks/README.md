@@ -19,7 +19,6 @@ Clone this repository
    ```bash
    git clone https://github.com/LukasPetrak/Projects/tree/main/Tanks
 
-## Build Instructions
-
-<h1 align="center">Run the game</h1>
-Start with file Tanky.m
+Run the game
+   ```bash
+   Start with file Tanky.m
