@@ -5,7 +5,7 @@ It is simple Nonogram game which was written in Python (OOP).
 
 ## Ukázka hry
 
-![Ukázka hry](https://github.com/LukasPetrak/Projects/blob/main/Tanks/gif.gif)
+![Ukázka hry](https://github.com/LukasPetrak/Projects/blob/main/Nonogram/nono/gif.gif)
 
 ## Game Controls
 
