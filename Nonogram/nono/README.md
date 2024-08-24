@@ -1,7 +1,7 @@
 
 # General Information
 
-It is simple Nonogram game which was written in Python (OOP). 
+It is simple Nonogram game which was written in Python. 
 
 ## Ukázka hry
 
