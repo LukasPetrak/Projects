@@ -15,7 +15,7 @@ It is simple tank game which was written in Matlab (OOP).
 
 ## Build Instructions
 
-#Clone this repository
+Clone this repository
    ```bash
    git clone https://github.com/vase-uzivatelske-jmeno/jmeno-repozitare.git
 # Run the game
