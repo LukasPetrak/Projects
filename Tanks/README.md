@@ -17,6 +17,7 @@ It is simple tank game which was written in Matlab (OOP).
 
 Clone this repository
    ```bash
-   git clone https://github.com/vase-uzivatelske-jmeno/jmeno-repozitare.git
-# Run the game
+   git clone https://github.com/LukasPetrak/Projects/tree/main/Tanks
+## 
+Run the game
 Start with file Tanky.m
